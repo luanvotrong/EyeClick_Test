@@ -7,24 +7,16 @@ public class Game : MonoBehaviour {
 	public GameObject prefabBall;
 
 	private GameObject ball;
-	private Camera camera;
+	Transform ballTransform;
 
 	// Use this for initialization
 	void Start () {
 		ball = Instantiate (prefabBall);
-
-		Transform transformCamera = mainCamera.GetComponent<Transform> ();
-		Vector3 ballPos = ball.transform.position;
-		transformCamera.position = new Vector3(ballPos.x, ballPos.y+20, ballPos.z);
-		transformCamera.rotation = Quaternion.Euler (90.0f, 0.0f, 0.0f);
-		camera = mainCamera.GetComponent<Camera> ();
-		camera.orthographic = true;
-		camera.orthographicSize = 10.0f;
+		mainCamera.GetComponent<CameraFollow> ().init (ball);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void OnMouseDown() {
